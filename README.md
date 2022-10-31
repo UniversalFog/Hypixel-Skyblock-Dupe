@@ -7,7 +7,7 @@ This glitch allows a user to save a gui of something like ah, bz, trade menu, et
 
 HOW TO INSTALL MOD:
 (It is available in the releases and the respiratory)
-1) click the releases button
+1) under the releases click DUPEMOD
 2) scroll down and dowload the DUPEMOD.jar
 
 
