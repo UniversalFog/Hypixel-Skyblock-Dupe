@@ -2,7 +2,7 @@
 A skyblock duplication glitch I fouund a while ago lol. 
 
 
-"I have made this project easily buildable by means of gradle"
+"this project is closed source and I do not feel like posting the code antime soon"
 
 
 This glitch allows a user to save a gui of something like ah, bz, trade menu, etc
